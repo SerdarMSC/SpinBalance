@@ -2,11 +2,8 @@
 import "./scripts/load-env.js";
 import type { ExpoConfig } from "expo/config";
 
-// Bundle ID format: space.manus.<project_name_dots>.<timestamp>
-// e.g., "my-app" created at 2024-01-15 10:30:45 -> "space.manus.my.app.t20240115103045"
-// Bundle ID can only contain letters, numbers, and dots
-// Android requires each dot-separated segment to start with a letter
-const rawBundleId = "space.manus.balansbul.t042474224974812";
+// Stable native application identifier requested for Spin Balance.
+const rawBundleId = "com.mscsi.spinbalance";
 const bundleId =
   rawBundleId
     .replace(/[-_]/g, ".") // Replace hyphens/underscores with dots
@@ -21,17 +18,17 @@ const bundleId =
       return /^[a-zA-Z]/.test(segment) ? segment : "x" + segment;
     })
     .join(".") || "space.manus.app";
-// Extract timestamp from bundle ID and prefix with "manus" for deep link scheme
-// e.g., "space.manus.my.app.t20240115103045" -> "manus20240115103045"
-const timestamp = bundleId.split(".").pop()?.replace(/^t/, "") ?? "";
-const schemeFromBundleId = `manus${timestamp}`;
+// Derive the app-specific deep-link scheme from the final bundle-ID segment.
+const schemeSuffix = bundleId.split(".").pop()?.replace(/^t/, "") ?? "";
+const schemeFromBundleId = `manus${schemeSuffix}`;
 
 const env = {
   // App branding - update these values directly (do not use env vars)
-  appName: "Balans Bul",
+  appName: "Spin Balance",
   appSlug: "balansbul",
   // Durable platform logo; native bundle assets remain in assets/images.
-  logoUrl: "https://files.manuscdn.com/user_upload_by_module/session_file/310519664059593667/dWEBiBgirzdbqxOG.png",
+  logoUrl:
+    "https://files.manuscdn.com/user_upload_by_module/session_file/310519664059593667/dWEBiBgirzdbqxOG.png",
   scheme: schemeFromBundleId,
   iosBundleId: bundleId,
   androidPackage: bundleId,
@@ -70,9 +67,9 @@ const config: ExpoConfig = {
   ios: {
     supportsTablet: true,
     bundleIdentifier: env.iosBundleId,
-    "infoPlist": {
-        "ITSAppUsesNonExemptEncryption": false
-      }
+    infoPlist: {
+      ITSAppUsesNonExemptEncryption: false,
+    },
   },
   android: {
     adaptiveIcon: {
@@ -109,7 +106,8 @@ const config: ExpoConfig = {
     [
       "expo-camera",
       {
-        cameraPermission: "Balans Bul'un balans analizi için kameraya erişmesine izin verin.",
+        cameraPermission:
+          "Balans Bul'un balans analizi için kameraya erişmesine izin verin.",
         microphonePermission: false,
         recordAudioAndroid: false,
       },
@@ -138,6 +136,9 @@ const config: ExpoConfig = {
       {
         android: {
           buildArchs: ["armeabi-v7a", "arm64-v8a"],
+          enableMinifyInReleaseBuilds: true,
+          enableShrinkResourcesInReleaseBuilds: true,
+          enablePngCrunchInReleaseBuilds: false,
           minSdkVersion: 24,
         },
       },

@@ -1,5 +1,12 @@
 import { Ionicons } from "@expo/vector-icons";
-import { Pressable, StyleSheet, Text, View, type StyleProp, type ViewStyle } from "react-native";
+import {
+  Pressable,
+  StyleSheet,
+  Text,
+  View,
+  type StyleProp,
+  type ViewStyle,
+} from "react-native";
 
 export function CameraGate({
   onRequest,
@@ -19,22 +26,35 @@ export function CameraGate({
         <Ionicons name="scan-outline" size={31} color="#B6F23A" />
       </View>
       <Text style={styles.eyebrow}>KAMERA / OPTİK İZLEME</Text>
-      <Text style={styles.title}>{isDenied ? "Kameraya erişilemiyor" : "Canlı görüntü için hazır"}</Text>
+      <Text style={styles.title}>
+        {isDenied ? "Kameraya erişilemiyor" : "Canlı görüntü için hazır"}
+      </Text>
       <Text style={styles.description}>
         {isDenied
           ? "Tarayıcı veya telefon ayarlarından kamera iznini açıp yeniden deneyin."
-          : "Rotoru güvenli mesafeden kadraja alın. Balans Bul yalnızca görüntüyü işler."}
+          : "Rotoru güvenli mesafeden kadraja alın. Spin Balance yalnızca görüntüyü işler."}
       </Text>
       <Pressable
         accessibilityRole="button"
         onPress={onRequest}
         disabled={isOpening}
-        style={({ pressed }) => [styles.button, pressed && !isOpening && styles.buttonPressed]}
+        style={({ pressed }) => [
+          styles.button,
+          pressed && !isOpening && styles.buttonPressed,
+        ]}
       >
-        <Ionicons name={isOpening ? "hourglass-outline" : "camera-outline"} size={17} color="#15191D" />
-        <Text style={styles.buttonText}>{isOpening ? "KAMERA AÇILIYOR" : "KAMERAYI AÇ"}</Text>
+        <Ionicons
+          name={isOpening ? "hourglass-outline" : "camera-outline"}
+          size={17}
+          color="#15191D"
+        />
+        <Text style={styles.buttonText}>
+          {isOpening ? "KAMERA AÇILIYOR" : "KAMERAYI AÇ"}
+        </Text>
       </Pressable>
-      <Text style={styles.privacy}>Video kaydedilmez veya sunucuya gönderilmez.</Text>
+      <Text style={styles.privacy}>
+        Video kaydedilmez veya sunucuya gönderilmez.
+      </Text>
     </View>
   );
 }
@@ -98,5 +118,10 @@ const styles = StyleSheet.create({
     fontFamily: "BarlowCondensed_700Bold",
     letterSpacing: 1.1,
   },
-  privacy: { color: "#68737E", fontSize: 10, marginTop: 12, textAlign: "center" },
+  privacy: {
+    color: "#68737E",
+    fontSize: 10,
+    marginTop: 12,
+    textAlign: "center",
+  },
 });
