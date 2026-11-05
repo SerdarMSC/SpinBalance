@@ -22,3 +22,7 @@
 ## Uyarılar ve sonuç akışı
 
 - [x] **Ölçüm durumu, uyarılar ve tekrar** — “Yetersiz ışık, aşırı titreşim veya uygun olmayan kadraj için gerçek zamanlı uyarılar”; “Ölçümü yeniden başlatma ve son sonucu özet ekranında görüntüleme”. Düşük ışık, görünmeyen referans, uygunsuz kadraj ve yüksek işaret-yörünge saçılımı için canlı uyarılar; durdurma, tekrar başlatma ve özet ekranı eklendi. Yüksek saçılım uyarısı doğrudan ivme sensörüyle ölçülen titreşim değil, optik kararsızlık göstergesidir.
+
+## Repo dokümantasyonu
+
+- [x] **Türkçe README** — “repo ... bir readme yazar mısın.” Repo için ürünün işlevini ve optik sınırlarını, kullanım/güvenlik adımlarını, Android indirme, geliştirme komutları ve CI akışını anlatan `README.md` oluşturuldu.
