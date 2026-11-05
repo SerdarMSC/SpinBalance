@@ -1,8 +1,9 @@
 # Balans Bul — Yapılacaklar
 
-## CI derleme
+## CI derleme ve uygulama ikonu
 
-- [x] **GitHub Actions yerel native test derlemeleri** — “GitHub Actions iş akışı, Android debug APK ile iOS Simulator derlemesini üretip indirilebilir artifact olarak saklar.” `.github/workflows/native-build.yml`, push/PR ve manuel çalıştırmada iki imzasız test derlemesini GitHub Actions artifact'i olarak saklar.
+- [x] **Android-only GitHub Actions derlemesi** — “iOS derlemesi gereksiz, workflow'dan kaldırabilirsin.” `.github/workflows/native-build.yml`, push/PR ve manuel çalıştırmada Android debug APK üretip 14 gün saklanan artifact olarak yükler; iOS derlemesi çalıştırmaz.
+- [x] **Sağlanan görseli uygulama ikonu olarak kullanma** — “uygulama ikonu olarak bunu set edebilirsin.” Kullanıcının `SpinBalanceRotorAnalysis.png` görseli `icon.png`, Android adaptive foreground, splash ve favicon dosyalarına uygulanır; Android monochrome varlığı da aynı görselden türetilir.
 
 ## Kamera önizlemesi ve ölçüm hazırlığı
 
