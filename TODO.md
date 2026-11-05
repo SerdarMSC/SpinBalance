@@ -1,13 +1,14 @@
 # Spin Balance — Yapılacaklar
 
-## Android kimlik ve yüklenebilir derleme
+## Android kimlik ve release paketi
 
 - [x] **Uygulama adı ve paket kimliği** — “uygulamanın adını \"Spin Balance\" olarak düzeltelim. \"com.mscsi.spinbalance\" olsun kimliği.” Expo uygulama adı ile iOS bundle ve Android package kimliği `Spin Balance` / `com.mscsi.spinbalance` olarak ayarlandı.
-- [ ] **Tek başına açılan, daha küçük Android APK** — “uygulamayı telefona kurdum ama splash screen'de kalıyor.”; “uygulama boyutu neden 135mb, bu çok fazla değil mi?” Eski debug APK `141,466,726` byte (`134.9 MiB`, `135M`) ölçüldü; 32-bit ve 64-bit native kütüphaneleri birlikte içeriyor fakat Android JavaScript bundle'ı içermiyor. Release workflow `assembleRelease`, R8 minify ve kullanılmayan kaynakları küçültme ayarlarını kullanıyor. Temiz CI denemeleri `babel-preset-expo`, ardından `@babel/plugin-transform-react-jsx` ve `react-native-css-interop/jsx-runtime` transitive resolve sorunlarını ortaya çıkardı; üç paket artık doğrudan bildirilmiştir. Yerel Android export 4.9 MB JavaScript bundle üretiyor. Temiz clone'da tekrar export ve yeni GitHub Release APK'sı ile gerçek boyut/telefonda Metro'suz açılış doğrulaması hâlâ bekleniyor.
+- [x] **Tek başına çalışan release APK ve boyut düşüşü** — “uygulama boyutu neden 135mb, bu çok fazla değil mi?” Eski debug APK `141,466,726` byte (`134.91 MiB`) idi; 32-bit ve 64-bit native kütüphaneleri içeriyor ve Android JS bundle'ı yoktu. R8/resource shrink içeren standalone Release APK üretildi: `70,434,481` byte (`67.17 MiB`), önceki APK'dan `%50.2` daha küçük. `assets/index.android.bundle` içinde `4,048,760` byte'lık JS bundle doğrulandı; APK hem `arm64-v8a` hem de `armeabi-v7a` desteğini koruyor. CI artifact'ı `spinbalance-android-release-apk` adıyla 14 gün saklıyor.
+- [ ] **Kullanıcının telefonunda açılış teyidi** — “uygulamayı telefona kurdum ama splash screen'de kalıyor.” Yeni APK release modunda JS bundle taşıyor; fiziksel telefon üzerinde bu oturumda kurup çalıştırma teyidi yapılamadı. Eski debug ve yeni Release APK farklı CI anahtarlarıyla imzalandıysa güncelleme reddedilebilir; böyle durumda eski uygulamayı kaldırıp yeni APK'yı kurun ve açılışı doğrulayın.
 
 ## CI derleme ve uygulama ikonu
 
-- [x] **Android-only GitHub Actions derlemesi** — “iOS derlemesi gereksiz, workflow'dan kaldırabilirsin.” `.github/workflows/native-build.yml`, push/PR ve manuel çalıştırmada Android release APK üretip 14 gün saklanan artifact olarak yükler; iOS derlemesi çalıştırmaz.
+- [x] **Android-only GitHub Actions derlemesi** — “iOS derlemesi gereksiz, workflow'dan kaldırabilirsin.” `.github/workflows/native-build.yml`, push/PR ve manuel çalıştırmada Android Release APK üretip 14 gün saklanan artifact olarak yükler; iOS derlemesi çalıştırmaz.
 - [x] **Sağlanan görseli uygulama ikonu olarak kullanma** — “uygulama ikonu olarak bunu set edebilirsin.” Kullanıcının `SpinBalanceRotorAnalysis.png` görseli `icon.png`, Android adaptive foreground, splash ve favicon dosyalarına uygulanır; Android monochrome varlığı da aynı görselden türetilir.
 
 ## Kamera önizlemesi ve ölçüm hazırlığı
